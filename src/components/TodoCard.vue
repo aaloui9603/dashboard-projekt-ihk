@@ -1,12 +1,22 @@
 <script setup>
-defineProps({
-  todo: {
-    type: Object,
-    required: true
-  }
+import { computed } from 'vue'
+import { useFolderStore } from '../stores/folderStore.js'
+
+
+const props = defineProps({
+    todo: {
+        type: Object,
+        required: true
+    }
 })
 
 const emit = defineEmits(['toggle-todo', 'delete-todo'])
+
+const folderStore = useFolderStore()
+
+const folder = computed(() => 
+    folderStore.folders.find(f => f.id === props.todo.folder_id)
+)
 </script>
 
 <template>
@@ -17,6 +27,13 @@ const emit = defineEmits(['toggle-todo', 'delete-todo'])
       @change="emit('toggle-todo', todo.id)"
       class="w-5 h-5"
     />
+
+    <span
+      v-if="folder"
+      class="w-3 h-3 rounded-full shrink-0"
+      :style="{ backgroundColor: `var(--color-${folder.color.toLowerCase()})` }"
+      :title="folder.title"
+    ></span>
 
     <div class="flex-1">
       <p :class="['font-medium', todo.is_done ? 'line-through opacity-50' : '']">

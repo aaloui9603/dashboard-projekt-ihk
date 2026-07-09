@@ -18,10 +18,10 @@ export const useNoteStore = defineStore('note', () => {
         notes.value = data
     }
 
-    async function addNote(title, description, color) {
+    async function addNote(title, description, color, folderId) {
         const { data, error } = await supabase 
         .from('notes')
-        .insert({ title, description, color })
+        .insert({ title, description, color, folder_id: folderId })
         .select()
 
         if (error) {

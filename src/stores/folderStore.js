@@ -15,7 +15,7 @@ export const useFolderStore = defineStore('folder', () => {
             console.error('Fehler beim Laden der Ordner:', error)
             return
         }
-        folderStore.value = data
+        folders.value = data
     }
 
     async function addFolder(title, color) {
