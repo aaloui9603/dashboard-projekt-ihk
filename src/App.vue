@@ -1,11 +1,9 @@
 <script setup>
-import ThemeToggle from './components/ThemeToggle.vue'
-import TodoList from './components/TodoList.vue'
-import FolderList from './components/FolderList.vue'
+import { RouterView } from 'vue-router'
+import Navbar from './components/Navbar.vue'
 </script>
 
 <template>
-  <ThemeToggle />
-  <FolderList />
-  <TodoList />
+  <Navbar />
+  <RouterView />
 </template>
