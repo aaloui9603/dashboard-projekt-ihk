@@ -1,0 +1,43 @@
+/* Hier werden die Farben zentral definiert, damit diese global eingesetzt werden können. 
+-- Customs Properties -- */ 
+
+:root {
+    /* Hintergrund */
+    --color-bg-1: #B0E2FF; 
+    --color-bg-2: #009ACD; 
+    --color-bg-3: #00FFFF; 
+
+    /* Ordnerfarben */
+    --color-skyblue1: #87CEFF; 
+    --color-skyblue2: #7EC0EE; 
+    --color-skyblue3: #6CA6CD; 
+    --color-turquoise1: #00F5FF; 
+    --color-turquoise2: #00E5EE; 
+    --color-turquoise3: #00C5CD; 
+    --color-lightpink1: #FFAEB9; 
+    --color-lightpink2: #EEA2AD; 
+    --color-lightpink3: #CD8C95; 
+    --color-slategray1: #C6E2FF; 
+    --color-slategray2: #B9D3EE; 
+    --color-slategray3: #9FB6CD; 
+    --color-seagreen1: #54FF9F; 
+    --color-seagreen2: #4EEE94; 
+    --color-seagreen3: #43CD80; 
+
+    /* Notizfarben */
+    --color-dodgerblue: #1E90FF; 
+    --color-violetred: #D02090; 
+    --color-gold: #FFD700; 
+    --color-orangered: #FF4500; 
+    --color-gray: #BEBEBE; 
+    --color-pink: #FFC0CB; 
+    --color-turquoise: #40E0D0;
+
+}
+
+/* dark */
+.dark { 
+    --color-bg-1: #0C2D48; 
+    --color-bg-2: #004C6D; 
+    --color-bg-3: #003B3B; 
+}

@@ -41,7 +41,7 @@ export const useFolderStore = defineStore('folder', () => {
             console.error('Fehler beim Löschen der Ordner:', error)
             return
         }
-        folders.value = folders.value.filter(f => f.id !== id)
+        folders.value = data 
     }
 
     return { folders, fetchFolders, addFolder, deleteFolder}
