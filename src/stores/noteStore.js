@@ -3,46 +3,64 @@ import { ref } from 'vue'
 import { supabase } from '../supabaseClient'
 
 export const useNoteStore = defineStore('note', () => {
-    const notes = ref([])
+  const notes = ref([])
 
-    async function fetchNotes() {
-        const { data, error } = await supabase
-        .from('notes')
-        .select('*')
-        .order('created_at', { ascending: false})
+  async function fetchNotes() {
+    const { data, error } = await supabase
+      .from('notes')
+      .select('*')
+      .order('created_at', { ascending: false })
 
-        if (error) {
-            console.error('Fehler beim Laden der Notizen:', error)
-            return
-        }
-        notes.value = data
+    if (error) {
+      console.error('Fehler beim Laden der Notizen:', error)
+      return
+    }
+    notes.value = data
+  }
+
+  async function uploadFile(file) {
+    const filePath = `${Date.now()}-${file.name}`
+    const { error: uploadError } = await supabase.storage
+      .from('note-attachments')
+      .upload(filePath, file)
+
+    if (uploadError) {
+      console.error('Fehler beim Hochladen der Datei:', uploadError)
+      return null
     }
 
-    async function addNote(title, description, color, folderId) {
-        const { data, error } = await supabase 
-        .from('notes')
-        .insert({ title, description, color, folder_id: folderId })
-        .select()
+    const { data } = supabase.storage
+      .from('note-attachments')
+      .getPublicUrl(filePath)
 
-        if (error) {
-            console.error('Fehler beim Erstellen der Notizen:', error)
-            return
-        }
-        notes.value.unshift(data[0])
+    return data.publicUrl
+  }
+
+  async function addNote(title, description, color, folderId = null, fileUrl = null) {
+    const { data, error } = await supabase
+      .from('notes')
+      .insert({ title, description, color, folder_id: folderId, file_url: fileUrl })
+      .select()
+
+    if (error) {
+      console.error('Fehler beim Erstellen der Notizen:', error)
+      return
     }
-    
-    async function deleteNote(id) {
-        const { error } = await supabase 
-        .from('notes')
-        .delete()
-        .eq('id', id)
+    notes.value.unshift(data[0])
+  }
 
-        if (error) {
-            console.error('Fehler beim Löschen der Notiz:', error)
-            return
-        }
-        notes.value = notes.value.filter(n => n.id !== id)
+  async function deleteNote(id) {
+    const { error } = await supabase
+      .from('notes')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('Fehler beim Löschen der Notiz:', error)
+      return
     }
+    notes.value = notes.value.filter(n => n.id !== id)
+  }
 
-    return { notes, fetchNotes, addNote, deleteNote }
+  return { notes, fetchNotes, uploadFile, addNote, deleteNote }
 })

@@ -14,6 +14,13 @@ import ThemeToggle from './ThemeToggle.vue'
         Start
       </RouterLink>
       <RouterLink
+        to="/dashboard"
+        class="font-medium px-3 py-1 rounded-lg hover:bg-white/30 dark:hover:bg-black/30"
+        active-class="bg-white/50 dark:bg-black/50"
+      >
+        Dashboard
+      </RouterLink>
+      <RouterLink
         to="/notizen"
         class="font-medium px-3 py-1 rounded-lg hover:bg-white/30 dark:hover:bg-black/30"
         active-class="bg-white/50 dark:bg-black/50"

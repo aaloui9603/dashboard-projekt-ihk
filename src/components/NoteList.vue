@@ -11,6 +11,7 @@ const newTitle = ref('')
 const newDescription = ref('')
 const selectedColor = ref('DodgerBlue')
 const selectedFolderId = ref(null)
+const selectedFile = ref(null)
 
 const noteColors = [
   'DodgerBlue', 'VioletRed', 'Gold', 'OrangeRed', 'Gray', 'Pink', 'Turquoise'
@@ -21,11 +22,22 @@ onMounted(() => {
   folderStore.fetchFolders()
 })
 
-function handleAdd() {
+function handleFileChange(event) {
+  selectedFile.value = event.target.files[0] || null
+}
+
+async function handleAdd() {
   if (!newTitle.value.trim()) return
-  noteStore.addNote(newTitle.value, newDescription.value, selectedColor.value, selectedFolderId.value)
+
+  let fileUrl = null
+  if (selectedFile.value) {
+    fileUrl = await noteStore.uploadFile(selectedFile.value)
+  }
+
+  noteStore.addNote(newTitle.value, newDescription.value, selectedColor.value, selectedFolderId.value, fileUrl)
   newTitle.value = ''
   newDescription.value = ''
+  selectedFile.value = null
 }
 </script>
 
@@ -45,6 +57,24 @@ function handleAdd() {
         rows="2"
         class="w-full rounded-xl px-4 py-2 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10"
       ></textarea>
+
+      <div class="flex items-center gap-3">
+        <label
+          for="file-upload"
+          class="cursor-pointer rounded-xl px-4 py-2 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 hover:bg-white/40 dark:hover:bg-black/40 transition"
+        >
+          Datei auswaehlen
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          @change="handleFileChange"
+          class="hidden"
+        />
+        <span v-if="selectedFile" class="text-sm opacity-70 truncate">
+          {{ selectedFile.name }}
+        </span>
+      </div>
 
       <div class="flex flex-wrap gap-2">
         <button
@@ -71,7 +101,7 @@ function handleAdd() {
         type="submit"
         class="rounded-xl px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
       >
-        Notiz hinzufügen
+        Notiz hinzufuegen
       </button>
     </form>
 

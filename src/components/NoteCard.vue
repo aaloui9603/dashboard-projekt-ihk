@@ -19,6 +19,15 @@ const folder = computed(() =>
 )
 
 const textColorClass = computed(() => getTextColorClass(props.note.color))
+
+const isImage = computed(() => {
+  if (!props.note.file_url) return false
+  return /\.(jpe?g|png|gif|webp|svg)$/i.test(props.note.file_url)
+})
+
+function openFile() {
+  window.open(props.note.file_url, '_blank')
+}
 </script>
 
 <template>
@@ -40,8 +49,25 @@ const textColorClass = computed(() => getTextColorClass(props.note.color))
         ✕
       </button>
     </div>
+
     <p v-if="note.description" :class="['text-sm mt-1', textColorClass]">
       {{ note.description }}
     </p>
+
+    <img
+      v-if="note.file_url && isImage"
+      :src="note.file_url"
+      @click="openFile"
+      class="mt-2 rounded-lg max-h-40 w-full object-cover"
+    />
+
+    <button
+      v-else-if="note.file_url"
+      type="button"
+      @click="openFile"
+      :class="['underline text-sm mt-2 block text-left', textColorClass]"
+    >
+      Datei oeffnen
+    </button>
   </div>
 </template>
