@@ -42,7 +42,7 @@ async function handleAdd() {
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-8 space-y-4">
+  <div class="max-w-xl mx-auto mt-8 px-4 space-y-4">
     <form @submit.prevent="handleAdd" class="space-y-3">
       <input
         v-model="newTitle"
@@ -58,7 +58,7 @@ async function handleAdd() {
         class="w-full rounded-xl px-4 py-2 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10"
       ></textarea>
 
-      <div class="flex items-center gap-3">
+      <div class="flex flex-wrap items-center gap-3">
         <label
           for="file-upload"
           class="cursor-pointer rounded-xl px-4 py-2 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 hover:bg-white/40 dark:hover:bg-black/40 transition"

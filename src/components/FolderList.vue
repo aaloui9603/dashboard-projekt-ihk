@@ -27,7 +27,7 @@ function handleAdd() {
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-8 space-y-4">
+  <div class="max-w-xl mx-auto mt-8 px-4 space-y-4">
     <form @submit.prevent="handleAdd" class="space-y-3">
       <input
         v-model="newTitle"

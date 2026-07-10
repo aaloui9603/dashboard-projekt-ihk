@@ -32,19 +32,19 @@ const folderStats = computed(() => {
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-8 space-y-6">
+  <div class="max-w-xl mx-auto mt-8 px-4 space-y-6">
     <h1 class="text-2xl font-bold">Statistik & Auswertung</h1>
 
-    <div class="grid grid-cols-3 gap-3">
-      <div class="rounded-xl px-4 py-3 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 text-center">
+    <div class="grid grid-cols-3 gap-2 sm:gap-3">
+      <div class="rounded-xl px-2 sm:px-4 py-3 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 text-center">
         <p class="text-2xl font-bold">{{ totalTodos }}</p>
         <p class="text-sm opacity-70">To-Dos</p>
       </div>
-      <div class="rounded-xl px-4 py-3 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 text-center">
+      <div class="rounded-xl px-2 sm:px-4 py-3 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 text-center">
         <p class="text-2xl font-bold">{{ folderStore.folders.length }}</p>
         <p class="text-sm opacity-70">Ordner</p>
       </div>
-      <div class="rounded-xl px-4 py-3 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 text-center">
+      <div class="rounded-xl px-2 sm:px-4 py-3 backdrop-blur-md bg-white/30 dark:bg-black/30 border border-white/40 dark:border-white/10 text-center">
         <p class="text-2xl font-bold">{{ noteStore.notes.length }}</p>
         <p class="text-sm opacity-70">Notizen</p>
       </div>
@@ -68,10 +68,10 @@ const folderStats = computed(() => {
       <h2 class="text-lg font-semibold mb-3">Erledigungsquote pro Ordner</h2>
       <div class="space-y-3">
         <div v-for="folder in folderStats" :key="folder.id">
-          <div class="flex justify-between items-center mb-1 text-sm">
+          <div class="flex flex-wrap justify-between items-center gap-1 mb-1 text-sm">
             <span class="flex items-center gap-2">
               <span
-                class="w-3 h-3 rounded-full"
+                class="w-3 h-3 rounded-full shrink-0"
                 :style="{ backgroundColor: `var(--color-${folder.color.toLowerCase()})` }"
               ></span>
               {{ folder.title }}

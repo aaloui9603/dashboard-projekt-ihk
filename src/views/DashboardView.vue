@@ -23,7 +23,7 @@ const doneTodos = computed(() => filteredTodos.value.filter(t => t.is_done))
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-8 space-y-6">
+  <div class="max-w-xl mx-auto mt-8 px-4 space-y-6">
     <h1 class="text-2xl font-bold">Dashboard</h1>
 
     <select
